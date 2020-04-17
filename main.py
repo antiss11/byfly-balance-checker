@@ -7,9 +7,9 @@ login = ''
 password = ''
 
 sleep_time = 6              # время в часах между проверками
-min_value = 2               # пороговое значение баланса
+min_balance = 2             # пороговое значение баланса
 
-sleep_time = sleep_time * 60 * 60 * sleep_time
+sleep_time = sleep_time * 60 * 60
 
 
 def check_balance():
@@ -20,7 +20,7 @@ def check_balance():
     browser.find_element_by_css_selector("button[type='submit']").click()
     browser.waiting(xpath="//div[@class='balance']/span", delay=30)
     balance = float(browser.find_element_by_xpath("//div[@class='balance']/span").text)
-    if balance <= min_value:
+    if balance <= min_balance:
         playsound("alert.wav")
     now = datetime.datetime.now()
     print(f"[{now.strftime('%H:%M %d/%m')}] Баланс: {balance}")
